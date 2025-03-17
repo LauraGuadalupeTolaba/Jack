@@ -1,0 +1,71 @@
+=(
+
+Clase -> Socio
+{
+nombre string
+edad int
+cuota double
+representante boolean
+}
+
+-------------------------------------------------------------------------------------
+GUIA 1
+
+Ejercicio 7
+
+Clase = Lista
+{
+  double dato;
+   sig ;
+  
+ public double setDato(double dato)
+{
+	this.dato = dato;
+}
+
+Un constructor donde se seteen los datos del nodo.
+
+public double getDato(); -> Se obtiene el dato;
+
+
+Para una Fila / cola
+
+{
+int[] datos = new int[50]; //Vector con los datos
+int pri,ult; // Para identificar el primero y el ultimo
+
+	public Cola()
+	{
+	superr();
+	This.pri=0;
+	this.ult=0;
+	}
+	
+	public void PoneC ("tipodedato" dato)
+	{
+	if(ult<50)
+	{
+        	if(this.pri==-1)
+			this.pri=1;
+		this.ult++;
+		this.datos[ult]=dato;
+	}
+	}
+}
+
+ETC;
+
+--------------------------------------------------------------------
+Pais -> paqute
+ Clase provincia dentro
+ {nombre - ciudades (lista de las ciudades)}
+ Clase -> Ciudad
+
+{
+nombre String
+cantHabitantes int
+recaudado double
+gastos double
+déficit boolean
+}
+
