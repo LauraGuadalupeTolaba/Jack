@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Surtidor
+{
++ cantGasoil : int
++ cantPremium : int
++ canttSuper : int
++ maximaCarga : int
++ litrosVendidosG : int
++ litrosVendidosS : int
++ litrosVendidosP : int
++ cantVentasP : int
+
+Surtidor()
+boolean extraerGasolina()
+boolean extraerPremium()
+boolean extraerSuper()
+int getCantGasoil()
+int getCantPremium()
+int getCantSuper()
+int litrosVendidosSurtidor()
+void llenarDepositoGasoil()
+void llenarDepositoPremium()
+void llenarDepositoSuper()
+
+}
+
+class Estacion
+{
++ Surtidores : Arraylist<Surtidor>
+void agregarSurtidor()
+void sacarSurtidor()
+int cantidadTotalS()
+int existenciaCombustibleP()
+int litrosVendidosEstacion()
+int mayorVentas()
+}
+
+Estacion *-->Surtidor
+
+@enduml

@@ -14,7 +14,7 @@ public class Main {
         Producto p3 = new Producto(789,"Frutillas",3999);
 
         Pedido pedido1 = new Pedido(empleado1,"22-3-2025");
-        System.out.println("Empleado encargado del pedido: " + pedido1.getEncargado().getEmpleado() + "\n Fecha del pedido : " + pedido1.getFecha() +"\n" );
+        System.out.println("Empleado encargado del pedido: " + pedido1.getEmpleado().getNombre() + "\n Fecha del pedido : " + pedido1.getFecha() +"\n" );
 
         pedido1.getLista().add(new LineadePedido(p1,2));
         pedido1.getLista().add(new LineadePedido(p2,4));
@@ -25,7 +25,7 @@ public class Main {
 
         System.out.println("Monto total: " + pedido1.TotalCompra() + "\n");
 
-        pedido1.setEncargado(empleado2);
+        pedido1.setEmpleado(empleado2);
 
         System.out.println(pedido1.toString());
 

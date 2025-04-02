@@ -30,4 +30,9 @@ public class Categoria {
     {
         this.sueldo = sueldo;
     }
+
+    @Override
+    public String toString() {
+        return "nombrecategoria='" + nombrecategoria + '\'' ;
+    }
 }

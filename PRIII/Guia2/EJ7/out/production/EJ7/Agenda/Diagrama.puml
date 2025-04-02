@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Telefonos
+{
+ nrofijo : int
+ celulares : Arraylist<int>;
+}
+
+class Agenda
+{
+ agenda : Arraylist<String,Telefonos>
+}
+
+Agenda *-->Telefonos
+@enduml

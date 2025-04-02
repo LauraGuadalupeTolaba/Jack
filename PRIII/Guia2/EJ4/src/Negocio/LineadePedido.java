@@ -2,23 +2,23 @@ package Negocio;
 
 public class LineadePedido
 {
-    private Producto articulo;
+    private Producto producto;
     private int cantidad;
 
-    public LineadePedido(Producto articulo, int cantidad)
+    public LineadePedido(Producto producto, int cantidad)
     {
-        this.articulo = articulo;
+        this.producto = producto;
         this.cantidad = cantidad;
     }
 
-    public Producto getArticulo()
+    public Producto getProducto()
     {
-        return articulo;
+        return producto;
     }
 
-    public void setArticulo(Producto articulo)
+    public void setProducto(Producto producto)
     {
-        this.articulo = articulo;
+        this.producto = producto;
     }
 
     public int getCantidad()
@@ -34,6 +34,6 @@ public class LineadePedido
     @Override
     public String toString()
     {
-        return   this.articulo.toString() + " Cantidad = " + cantidad + "\n";
+        return   this.producto.toString() + " Cantidad = " + cantidad + "\n";
     }
 }

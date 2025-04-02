@@ -4,15 +4,28 @@ public class Chofer {
     private Categoria categoria;
     private Domicilio domicilio;
     private String nombre;
+    private Colectivo colectivo;
 
-    public Chofer(Categoria categoria, Domicilio domicilio, String nombre)
+
+    public Chofer(Categoria cat, Domicilio dom, String nbre)
     {
-        this.categoria = categoria;
-        this.domicilio = domicilio;
-        this.nombre = nombre;
+        categoria = cat;
+        domicilio = dom;
+        nombre = nbre;
     }
 
-    public Categoria getCategoria() {
+    public Colectivo getColectivo()
+    {
+        return colectivo;
+    }
+
+    public void setColectivo(Colectivo colectivo)
+    {
+        this.colectivo = colectivo;
+    }
+
+    public Categoria getCategoria()
+    {
         return categoria;
     }
 
@@ -27,9 +40,9 @@ public class Chofer {
 
     }
 
-    public void setDomicilio(Domicilio domicilio)
+    public void setDomicilio(Domicilio dom)
     {
-        this.domicilio = domicilio;
+        domicilio = dom;
     }
 
     public String getNombre()
@@ -37,8 +50,20 @@ public class Chofer {
         return nombre;
     }
 
-    public void setNombre(String nombre)
+    public void setNombre(String nbre)
     {
-        this.nombre = nombre;
+        nombre = nbre;
+    }
+
+    public void desvincularColectivo()
+    {
+        colectivo=null;
+    }
+    @Override
+    public String toString() {
+        return "Chofer" +
+                "categoria=" + categoria.toString() +
+                ", nombre='" + nombre + '\'' +
+                ", colectivo=" + colectivo ;
     }
 }

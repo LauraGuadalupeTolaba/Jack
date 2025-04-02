@@ -4,10 +4,10 @@ public class Colectivo {
     private String modelo;
     private int numerointerno;
 
-    public Colectivo(String modelo, int numerointerno)
+    public Colectivo(String m,int nrointerno)
     {
-        this.modelo = modelo;
-        this.numerointerno = numerointerno;
+        numerointerno = nrointerno;
+        modelo = m;
     }
 
     public String getModelo()
@@ -28,5 +28,11 @@ public class Colectivo {
     public void setNumerointerno(int numerointerno)
     {
         this.numerointerno = numerointerno;
+    }
+
+    @Override
+    public String toString() {
+        return "Modelo='" + modelo + '\'' +
+                ", Numerointerno=" + numerointerno ;
     }
 }

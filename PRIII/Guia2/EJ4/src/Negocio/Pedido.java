@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Pedido
 {
-    private Empleado encargado;
+    private Empleado empleado;
     private String fecha;
 
     private ArrayList<LineadePedido> lista = new ArrayList<>() ;
 
-    public Pedido(Empleado encargado, String fecha)
+    public Pedido(Empleado empleado, String fecha)
     {
-        this.encargado = encargado;
+        this.empleado = empleado;
         this.fecha = fecha;
     }
 
@@ -20,14 +20,14 @@ public class Pedido
         return lista;
     }
 
-    public Empleado getEncargado()
+    public Empleado getEmpleado()
     {
-        return encargado;
+        return empleado;
     }
 
-    public void setEncargado(Empleado encargado)
+    public void setEmpleado(Empleado empleado)
     {
-        this.encargado = encargado;
+        this.empleado = empleado;
     }
 
     public String getFecha()
@@ -44,16 +44,16 @@ public class Pedido
     {
         double total = 0.0;
 
-        for(int i = 0; i < lista.size(); i++)
+        for (LineadePedido lineadePedido : lista)
 
-            total += lista.get(i).getArticulo().getPreciounitario() * lista.get(i).getCantidad();
+            total += lineadePedido.getProducto().getPreciounitario() * lineadePedido.getCantidad();
 
         return total;
     }
     @Override
     public String toString() {
         return "PEDIDO :\n" +
-                "Encargado de pedido :" + this.encargado.getEmpleado() +
+                "Empleado :" + this.empleado.getNombre() +
                 "\n Fecha realizada =" + this.fecha  +
                 "\n Lista = \n " + lista  ;
     }

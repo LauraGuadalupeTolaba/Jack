@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Empleado {
+- nombre: String
+- email: String
+- telefono: String
+
++ Empleado(String nombre,String email,String telefono)
++ String getNombre()
++ String getEmail()
++ String getTelefono()
+
+}
+
+class Producto{
+- codigo : int
+- descripción : String
+-preciounitario : double
+
++Producto(int codigo,String descripción,double preciounitario)
++getandset()
++String toString()
+
+}
+
+class LineadePedido{
+- producto : Producto
+- cantidad : Int
+
++LineadePedido(Producto producto,int cantidad)
++ getandset()
++ String toString()
+}
+
+class Pedido{
+- empleado : Empleado
+- fecha : String
+- Lista : Arraylist<ListadePedido>
+
++Pedido(Empleado empleado,String fecha)
++Arraylist<LineadePedido>getLista ()
++double Totalcompra()
++String toString()
++getandset()
+
+}
+Class Negocio{
+- emplados : Arraylist<Empleado>
+- pedidos : Arraylist<Pedido>
+
+}
+
+Negocio *--> Empleado : ""
+Negocio *--> Pedido : ""
+Negocio *--> Producto : ""
+
+Pedido *--> LineadePedido : ""
+
+Pedido o--> Empleado : ""
+
+@enduml

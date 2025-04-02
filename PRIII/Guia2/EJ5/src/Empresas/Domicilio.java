@@ -26,7 +26,8 @@ public class Domicilio {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(int numero)
+    {
         this.numero = numero;
     }
 }

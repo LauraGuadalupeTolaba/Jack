@@ -2,23 +2,23 @@ package Negocio;
 
 public class Empleado
 {
-    private String empleado, email,telefono;
+    private String nombre, email,telefono;
 
-    public Empleado(String empleado, String email, String telefono)
+    public Empleado(String nombre, String email, String telefono)
     {
-        this.empleado = empleado;
+        this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
     }
 
-    public String getEmpleado()
+    public String getNombre()
     {
-        return empleado;
+        return nombre;
     }
 
-    public void setEmpleado(String empleado)
+    public void setNombre(String nombre)
     {
-        this.empleado = empleado;
+        this.nombre = nombre;
     }
 
     public String getEmail()
