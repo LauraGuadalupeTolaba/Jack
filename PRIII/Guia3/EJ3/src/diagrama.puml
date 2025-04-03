@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Cuenta{
++ private double saldo;
++ private final String nombre;
++ Cuenta(String nombre);
++ getSaldo();
++ getNombre();
++void extraer(double importe);
++void deposito(double importe);
+}
+
+class CuentaCorriente{
++ private double tope;
++ CuentaCorriente(String nombre,double tope);
++ void extraer(double importe);
+}
+
+class CajaAhorro{
++ protected maxExtracciones;
++ CajaAhorro(String nombre);
+}
+
+class CuentaUniversitaria{
++ private boolean unica;
++ void extraer(double importe);
+}
+
+Cuenta <-- CuentaCorriente
+Cuenta <-- CuentaUniversitaria
+Cuenta <-- CajaAhorro
+@enduml
