@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1744294203 source:c:\users\patroclo\jack\arqui=s\prueba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
