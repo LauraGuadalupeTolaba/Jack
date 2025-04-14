@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Colectivo
+{
++ modelo : String
++ numerointerno : int
+
+Colectivo(String modelo)
+}
+
+class Categoria
+{
++ nombrecategoria : String
++ sueldo : double
+}
+
+class Domicilio
+{
++ calle String
++ numero int
+}
+
+class Chofer
+{
++ categoria : Categoria
++ domicilio : Domicilio
++ nombre : String
++ colectivo : Colectivo
+getandset()
+Chofer(Categoria categoria,Domicilio domicilio, String nombre, Colectivo colectivo)
+boolean asignacionColectivo()
+}
+
+class Empresa
+{
++ categorias : Arraylist<Categoria>
++ colectivos : Arraylist<Colectivo>
++ choferes : Arraylist<Chofer>
+getandset()
+void agregarCategoria(Categoria categoria)
+void agregarColectivo(Colectivo colectivo)
+void agregarChofer(Chofer chofer)
+int totalColectivos()
+void montoSupChoferes()
+}
+
+Empresa *--> Chofer
+Empresa *--> Colectivo
+Empresa *--> Categoria
+Chofer o--> Colectivo
+Chofer *--> Domicilio
+Categoria o-->Chofer
+@enduml
