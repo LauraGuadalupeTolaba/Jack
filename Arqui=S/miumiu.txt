@@ -1,0 +1,157 @@
+american teenager - Ethel cain
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include "TabladeSegmento.h"
+
+typedef struct {
+
+    char identificador[5];
+    uint8_t version;
+    uint16_t TamanioCodigo;
+
+}Theader;
+
+int main()
+{
+
+    Theader header;
+
+    void SetTabla(tabla,TamanioCodigo);
+
+
+    return 0;
+}
+
+Tabla de Segmentos 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include "TabladeSegmento.h"
+
+void setBaseCS(int tabla[][COL], uint16_t valor){
+    valor = 0;
+    tabla[0][0] = valor;
+}
+void setTamanioCS(int tabla[][COL],uint16_t valor){
+    tabla[0][1] = valor;
+}
+void setBaseDS (int tabla[][COL], uint16_t valor){
+    tabla[1][0] = valor;
+}
+void setTamanioDS(int tabla[][COL], uint16_t valor){
+    tabla[1][1] = valor;
+}
+
+-----------------------------------------------------------------------------
+
+Leer las instrucciones
+Primero debemos sacar el byte uint_8
+
+//PP
+uint8_t opcode   = (instruccion & 0xF0) >> 4;
+uint8_t operando = instruccion & 0x0F;
+
+Unit8_t OpB,OpA,CodOperacion;
+-------------------------------------//-----------------
+
+typedef struct {
+
+	int8 OpB,OpA,CodOperacion;
+
+}TDatos;
+
+Primero va a leer la instrucción
+
+Tdatos componentes;
+
+While (fread(&instrucción , sizeof(uint8_t) , 1 , archb) == 1){
+	
+	componentes = obtener_abc(instruccion);	
+	BOOperaciones(componentes);
+	
+
+}
+
+
+***
+
+Void BOOperaciones(Componentes){
+	
+	Swiych (componentes.instruccion) {
+	
+		Case 0x00 : MOV
+			breack;
+		Case 0x01 :
+	
+	}
+	
+
+}
+
+
+TDatos abc_comp(_int8 instruccion){
+	
+	Tdatos aux;
+	
+	aux.OpB = (instruccion >> 6 ) & 0x3 ;
+	aux.OpA = (instrucción >> 4 ) & 0x3 ;
+	aux.CodOperacion = instruccion & 0x1F ;
+
+	return aux;
+
+}
+
+/// Inicia registro CS DS IP 
+
+IniciaRegistros( Componentes *comp ){
+	
+	(*comp).registros[0] = 0 ;
+	(*comp).registro [1] = (*comp).tabladesegmentos[0][1] ;
+	(*comp).registro[5] = (*comp) . registros[0] ;
+	(*comp).error = 0 ;
+
+}
+
+
+int main ()
+{
+
+	TDatos abc ;
+	Theader header;
+	Componentes componente;	
+	int8_t instruccion ;
+	int i=0;
+	
+	LeeArchivo(comp);
+	IniciaRegistros(comp);
+	
+	while (componentes.Error == 0 ){ //
+		instrucción = componentes.memoria[i];
+		abc = obtener_abc(instruccion);
+		//Que llame al disassembler.
+    		EjecutarOperacion(abc,&componentes);
+		i++;
+	}
+
+	// Llama a una función que dice porque corto;
+		
+// Disassembler
+
+void Disassembler(componentes, TDatos abc){
+
+	
+	
+	
+
+}	
+
+
+}
+
+/// 
+
+
+
+
