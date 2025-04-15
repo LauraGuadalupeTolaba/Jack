@@ -145,11 +145,14 @@ void Disassembler(componentes comp, TDatos abc,int i){
 	char operaciones[Total] = ["SYS","JMP","..."] //Todas las funciones
 	char registros[total16] = ["..."] // Todos los registros pero solo va a ontener un char
 	
-	printf("[%d4]\t %x",i,comp.memoria[i]);
+	printf("[%04d]\t %x",i,comp.memoria[i]);
 	printf("%s \t ",abc.codigo); // Va a escribir primero el MNEM
-	Op_AB(abc.OpA,comp,&auxa); // aux va a ser un String;
+	Op_AB(abc.OpB,comp,&auxb); // aux va a ser un String;
 	SAme a la fucnion pero con auxb
-	Significado(aux);
+	printf("|");
+	Significado(auxa);
+	Significado(auxb);
+	printf("\n");
 }	
 
 void Op_AB( TDatos Op ,Componentes comp,int32_t  aux){
@@ -166,7 +169,7 @@ void Op_AB( TDatos Op ,Componentes comp,int32_t  aux){
 		case 0b11: //Es memoria
 			final = 3;
 			break;
-		for(inicio=i;inicio <= final;i++){
+		for(inicio=i;inicio <= final;i++){ //  Imprime los valores de los bits en hexadeimal
 			printf("%x\t",comp.memoria[inicio]);
 			*aux=comp.memoria[inicio];
 			*aux= *aux << 8; // Va a correr para hacer entrar los otros o bits;
@@ -178,6 +181,8 @@ void Op_AB( TDatos Op ,Componentes comp,int32_t  aux){
 }
 void Significado(int8_t Op,int32_t auxiliar){
 	
+	//Aquí em conviene crear el vector con los registros, 
+
 	siwtch(op){
 		case 0b01:
 			aux1= (auxiliar >> 2) & 0x00000003 // quiero tomar los últimos dos
@@ -204,7 +209,6 @@ void Significado(int8_t Op,int32_t auxiliar){
 			else
 				printf("[%s]",registro[aux1]);
 
-		case 0b11:
 	}
 }
 
