@@ -108,9 +108,8 @@ TDatos abc_comp(_int8 instruccion){
 IniciaRegistros( Componentes *comp ){
 	
 	(*comp).registros[0] = 0 ;
-	(*comp).registro [1] = (*comp).tabladesegmentos[0][1] ;
-	(*comp).registro[5] = (*comp) . registros[0] ;
-	(*comp).error = 0 ;
+	(*comp).registro [1] = 10 ;
+	(*comp).registro[5] = 0;
 
 }
 
@@ -139,15 +138,74 @@ int main ()
 		
 // Disassembler
 
-void Disassembler(componentes, TDatos abc){
+//total de funciones 30 para que se corresponda directamente con el hexadecimal 
 
+void Disassembler(componentes comp, TDatos abc,int i){
 	
+	char operaciones[Total] = ["SYS","JMP","..."] //Todas las funciones
+	char registros[total16] = ["..."] // Todos los registros pero solo va a ontener un char
 	
-	
-
+	printf("[%d4]\t %x",i,comp.memoria[i]);
+	printf("%s \t ",abc.codigo); // Va a escribir primero el MNEM
+	Op_AB(abc.OpA,comp,&auxa); // aux va a ser un String;
+	SAme a la fucnion pero con auxb
+	Significado(aux);
 }	
 
+void Op_AB( TDatos Op ,Componentes comp,int32_t  aux){
 
+	aux=0;
+	
+	switch (Op){
+		case 0b01: //Es registro
+			final =1;
+			break;
+		case 0b10: // Es inmediato
+			final=2;
+			break;
+		case 0b11: //Es memoria
+			final = 3;
+			break;
+		for(inicio=i;inicio <= final;i++){
+			printf("%x\t",comp.memoria[inicio]);
+			*aux=comp.memoria[inicio];
+			*aux= *aux << 8; // Va a correr para hacer entrar los otros o bits;
+		}
+		
+	}
+
+
+}
+void Significado(int8_t Op,int32_t auxiliar){
+	
+	siwtch(op){
+		case 0b01:
+			aux1= (auxiliar >> 2) & 0x00000003 // quiero tomar los últimos dos
+			aux2= (auxiliar >> 2) & 0X0000000F //Quiero los últimos cuatrp
+			if(aux1 == 0b00) // Es completo
+				printf("E%cX\t",registro[aux2]);
+			else
+				if( aux1 == 0b01) // Es el uato bite
+					printf("%cL",registro[aux2]);
+				else
+					if (auxx1 == 0b10) //
+						printf("%cH",registro[aux2]);
+					else
+						printf("%cX",(registro[aux2])[1]);
+			break;
+		case 0b10: // Es un inmediato
+			printf("%d",auxiliar);
+			break;
+		case 0b11: // Es en memoria
+			aux1=(auxiliar >> 4) & 0X0000000F ;//Quiero los 4 de registro
+			aux2=(auxiliar >> 4) ; 
+			if(aux2 > 1)
+				printf("[E%cX + %d ]",registro[aux1],aux2);
+			else
+				printf("[%s]",registro[aux1]);
+
+		case 0b11:
+	}
 }
 
 /// 
