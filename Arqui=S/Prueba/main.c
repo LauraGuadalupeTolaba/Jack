@@ -3,76 +3,158 @@
 #include <stdint.h>
 #define TOTAL 30
 
+typedef struct{
+	uint8_t tipo;
+	int operando;
+}Toperando;
+
+typedef struct {
+
+	int8_t OpB,OpA,CodOperacion;
+
+}TDatos;
+
+typedef struct{
+	uint8_t memoria[20];
+	int tabladesegmentos[10][10];
+	int error;
+	int registros[17];
+}Componentes;
+
+typedef char stringg[5];
+
+
+TDatos obtener_abc(int8_t);
+void EjecutarOperacion(TDatos);
+void LeeArchivo(Componentes);
 void Disassembler(Componentes,TDatos,int);
+void Op_AB(int8_t , Componentes , int32_t *,int*);
+void Significado(int8_t , int32_t);
 
 int main()
 {
+    TDatos abc;
+    Componentes comp;
+    int i =0;
+    int8_t instruccion;
 
+    comp.memoria[0]=0xB1;
+    comp.memoria[1]=0x00;
+    comp.memoria[2]=0x0A;
+    comp.memoria[3]=0x00;
+    comp.memoria[4]=0x05;
+    comp.memoria[5]=0x10;
+    comp.memoria[6]=0x97;
+    comp.memoria[7]=0x00;
+    comp.memoria[8]=0x10;
+    comp.memoria[8]=0xA0;
+    comp.memoria[9]=0x48;
+
+
+    instruccion = 0x00;
+    instruccion = comp.memoria[i];
+    printf("instruccion: %02X\n",instruccion);
+    abc = obtener_abc(instruccion);
+    printf("OpA : %02X\t OpB : %02X\n",abc.OpA,abc.OpB);
     Disassembler(comp,abc,i);
 
 }
 
 void Disassembler(Componentes comp,TDatos abc, int i)
 {
-    char Operaciones[TOTAL] = {"SYS","JMP","JZ","JP","JN","JNZ","JNP","JNN","NOT","","","","","","STOP","MOV","ADD","SUB","SWAP","MUL","DIV","CMP","SHL","SHR","AND","OR","XOR","LDL","LDH","RND"};
+    stringg Operaciones[TOTAL] = {"SYS","JMP","JZ","JP","JN","JNZ","JNP","JNN","NOT","","","","","","","STOP","MOV","ADD","SUB","SWAP","MUL","DIV","CMP","SHL","SHR","AND","OR","XOR","LDL","LDH","RND"};
     int32_t auxb,auxa;
+    int ind=i;
 
-    printf("[%04d]\t %X",i,comp.memoria[i]);
+    printf("[%04d]\t %02X\t",i,comp.memoria[i]);
     // Muestra los valores en hexadecimal.
-    Op_AB(abc.OpB,comp,&auxb);
-    Op_AB(abc.OpA,comp,&auxa);
+    auxa=auxb=0X0;
+    Op_AB(abc.OpB,comp,&auxb,&ind);
+    Op_AB(abc.OpA,comp,&auxa,&ind);
     printf("|\t");
 
+    printf("%s",Operaciones[abc.CodOperacion]);
     Significado(abc.OpA,auxa);
     Significado(abc.OpB,auxb);
     printf("\n");
 
 }
 
-void Op_AB(int8_t Op, Componentes comp, int32_t *aux)
+void Op_AB(int8_t Op, Componentes comp, int32_t *aux,int *i)
 {
 
-   int final,inicio;
+   int finall,inicio=1;
 
    switch(Op){
 
         case 0b01 : //Es registro
 
-            final = 1;
+            finall = 1;
             break;
 
         case 0b10 :
 
-            final = 2;
+            finall = 2;
             break;
 
         case 0b11 :
 
-            final = 3;
+            finall = 3;
             break;
 
    }
 
-   for (inicio=i ; inicio<= final ; i++){
 
+    while ( inicio <= finall ){
+
+        (*i)++;
         *aux = *aux << 8;
-        printf("%X\t",comp.memoria[inicio]);
-        *aux = comp.memoria[inicio];
+        printf("%02X\t",comp.memoria[*i]);
+        *aux =(*aux) | comp.memoria[*i];
+        inicio ++;
 
    }
+
 
 
 
 }
 
 void Significado(int8_t op, int32_t auxiliar){
+/**
+    int8_t aux1=aux2=0;
 
     switch(op){
-    case 0b01:
-        aux1
 
+        case 0b01:
+            aux1 = (auxiliar >> 2) & 0x03;
+            aux2 = (auxiliar >> 4) & 0x0F;
+            if(aux1 == 0b00)
+                printf()
+                **/
     }
 
+
+TDatos obtener_abc(int8_t instruccion){
+
+	TDatos aux;
+
+	aux.OpB = (instruccion >> 6 ) & 0x03 ;
+	aux.OpA = (instruccion >> 4 ) & 0x03 ;
+	aux.CodOperacion = instruccion & 0x1F ;
+
+	return aux;
+
 }
+
+void InsertaMemoria(Componentes comp,int dir,int dato){
+int i, aux = 0;
+    for (i=0;i<4;i++){
+        aux = ((dato>>24)-i*8) & 0xFF;
+        comp.memoria[dir+i] = aux;
+    }
+}
+
+
 
 
