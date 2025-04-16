@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#define TOTAL 30
+#define TOTAL 31
+#define TOTALR 17
 
 typedef struct{
 	uint8_t tipo;
@@ -35,7 +36,7 @@ int main()
 {
     TDatos abc;
     Componentes comp;
-    int i =0;
+    int i =10;
     int8_t instruccion;
 
     comp.memoria[0]=0xB1;
@@ -47,15 +48,16 @@ int main()
     comp.memoria[6]=0x97;
     comp.memoria[7]=0x00;
     comp.memoria[8]=0x10;
-    comp.memoria[8]=0xA0;
-    comp.memoria[9]=0x48;
+    comp.memoria[9]=0xA0;
+    comp.memoria[10]=0x48;
+    comp.memoria[11]=0xEC;
 
 
     instruccion = 0x00;
     instruccion = comp.memoria[i];
-    printf("instruccion: %02X\n",instruccion);
+    // printf("instruccion: %02X\n",instruccion); prueba
     abc = obtener_abc(instruccion);
-    printf("OpA : %02X\t OpB : %02X\n",abc.OpA,abc.OpB);
+    // printf("OpA : %02X\t OpB : %02X\n",abc.OpA,abc.OpB); prueba
     Disassembler(comp,abc,i);
 
 }
@@ -66,15 +68,21 @@ void Disassembler(Componentes comp,TDatos abc, int i)
     int32_t auxb,auxa;
     int ind=i;
 
-    printf("[%04d]\t %02X\t",i,comp.memoria[i]);
+    printf("[%04X]\t %02X\t",i,comp.memoria[i]);
     // Muestra los valores en hexadecimal.
     auxa=auxb=0X0;
     Op_AB(abc.OpB,comp,&auxb,&ind);
     Op_AB(abc.OpA,comp,&auxa,&ind);
     printf("|\t");
 
-    printf("%s",Operaciones[abc.CodOperacion]);
-    Significado(abc.OpA,auxa);
+    printf("%s\t",Operaciones[abc.CodOperacion]);
+
+    if(abc.OpA != 0x0)
+    {
+        Significado(abc.OpA,auxa);
+        printf(",\t");
+    }
+
     Significado(abc.OpB,auxb);
     printf("\n");
 
@@ -121,18 +129,54 @@ void Op_AB(int8_t Op, Componentes comp, int32_t *aux,int *i)
 }
 
 void Significado(int8_t op, int32_t auxiliar){
-/**
-    int8_t aux1=aux2=0;
+
+    int8_t aux1=0,aux2=0;
+    stringg Registross[TOTALR] = {"CS","DS"," "," "," ","IP"," "," ","CC","AC","EAX","EBX","ECX","EDX","EEX","EFX"};
 
     switch(op){
 
         case 0b01:
+
             aux1 = (auxiliar >> 2) & 0x03;
             aux2 = (auxiliar >> 4) & 0x0F;
-            if(aux1 == 0b00)
-                printf()
-                **/
+            if(aux1 == 0b00) // Es completo el registro.
+
+                printf("%s",Registross[aux2]);
+
+            else
+                if (aux1 == 0b01)
+
+                    printf("%cL",Registross[aux1][1]);
+
+                else
+                        if(aux1 == 0b10)
+
+                            printf("%cH",Registross[aux2][1]);
+
+                        else
+
+                            printf("%cX",Registross[aux2][1]);
+            break;
+
+        case 0b10: // Es un inmediato
+
+            printf("%d",auxiliar);
+            break;
+
+        case 0b11: // Es memoria
+
+            aux1 = (auxiliar >> 4) & 0X0000000F ;
+            aux2 = (auxiliar >> 8);
+            if(aux2 > 0)
+
+                printf("[%s + %d]",Registross[aux1],aux2);
+
+            else
+
+                printf("[%s]",Registross[aux1]);
+            break;
     }
+}
 
 
 TDatos obtener_abc(int8_t instruccion){
@@ -147,14 +191,18 @@ TDatos obtener_abc(int8_t instruccion){
 
 }
 
+/**
 void InsertaMemoria(Componentes comp,int dir,int dato){
+
 int i, aux = 0;
+
     for (i=0;i<4;i++){
         aux = ((dato>>24)-i*8) & 0xFF;
         comp.memoria[dir+i] = aux;
     }
-}
 
+}
+**/
 
 
 
