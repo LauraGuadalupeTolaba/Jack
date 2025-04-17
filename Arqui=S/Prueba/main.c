@@ -36,7 +36,7 @@ int main()
 {
     TDatos abc;
     Componentes comp;
-    int i =10;
+    int i =0;
     int8_t instruccion;
 
     comp.memoria[0]=0xB1;
@@ -72,7 +72,10 @@ void Disassembler(Componentes comp,TDatos abc, int i)
     // Muestra los valores en hexadecimal.
     auxa=auxb=0X0;
     Op_AB(abc.OpB,comp,&auxb,&ind);
-    Op_AB(abc.OpA,comp,&auxa,&ind);
+
+    if(abc.OpA != 0x0)
+        Op_AB(abc.OpA,comp,&auxa,&ind);
+
     printf("|\t");
 
     printf("%s\t",Operaciones[abc.CodOperacion]);
