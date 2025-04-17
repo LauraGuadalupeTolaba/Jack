@@ -36,7 +36,7 @@ int main()
 {
     TDatos abc;
     Componentes comp;
-    int i =0;
+    int i =10;
     int8_t instruccion;
 
     comp.memoria[0]=0xB1;
@@ -72,9 +72,7 @@ void Disassembler(Componentes comp,TDatos abc, int i)
     // Muestra los valores en hexadecimal.
     auxa=auxb=0X0;
     Op_AB(abc.OpB,comp,&auxb,&ind);
-
-    if(abc.OpA != 0x0)
-        Op_AB(abc.OpA,comp,&auxa,&ind);
+    Op_AB(abc.OpA,comp,&auxa,&ind);
 
     printf("|\t");
 
@@ -98,17 +96,22 @@ void Op_AB(int8_t Op, Componentes comp, int32_t *aux,int *i)
 
    switch(Op){
 
-        case 0b01 : //Es registro
+        case 0b00 :
+
+            finall = 0; // No entra nunca al ciclo for
+            break;
+
+        case 0b01 :     // Es registro
 
             finall = 1;
             break;
 
-        case 0b10 :
+        case 0b10 :     // Es inmediato
 
             finall = 2;
             break;
 
-        case 0b11 :
+        case 0b11 :     // Es memoria
 
             finall = 3;
             break;
@@ -126,9 +129,6 @@ void Op_AB(int8_t Op, Componentes comp, int32_t *aux,int *i)
 
    }
 
-
-
-
 }
 
 void Significado(int8_t op, int32_t auxiliar){
@@ -142,23 +142,23 @@ void Significado(int8_t op, int32_t auxiliar){
 
             aux1 = (auxiliar >> 2) & 0x03;
             aux2 = (auxiliar >> 4) & 0x0F;
-            if(aux1 == 0b00) // Es completo el registro.
+            if(aux1 == 0b00)                                        // Registro completo
 
                 printf("%s",Registross[aux2]);
 
             else
-                if (aux1 == 0b01)
+                if (aux1 == 0b01)                                  // 1 byte de registro (XL)
 
                     printf("%cL",Registross[aux1][1]);
 
                 else
                         if(aux1 == 0b10)
 
-                            printf("%cH",Registross[aux2][1]);
+                            printf("%cH",Registross[aux2][1]);     // 1 byte de registro (XH)
 
                         else
 
-                            printf("%cX",Registross[aux2][1]);
+                            printf("%cX",Registross[aux2][1]);     // 2 byte de registro (AX)
             break;
 
         case 0b10: // Es un inmediato
