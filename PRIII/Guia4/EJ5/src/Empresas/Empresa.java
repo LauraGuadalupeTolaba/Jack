@@ -6,7 +6,7 @@ public class Empresa {
     private static Empresa _instancia = null;
     private ArrayList<Categoria> categorias = new ArrayList<>();
     private ArrayList<Chofer> choferes = new ArrayList<>();
-    private ArrayList<Colectivo> colectivos = new ArrayList<>();
+    private ArrayList<Vehiculo> vehiculos = new ArrayList<>();
     int nrointerno=0;
 
     private Empresa()
@@ -26,9 +26,9 @@ public class Empresa {
         return choferes.get(ind) ;
     }
 
-    public Colectivo obtenerColectivo(int ind)
+    public Vehiculo obtenerColectivo(int ind)
     {
-        return colectivos.get(ind);
+        return vehiculos.get(ind);
     }
 
     public ArrayList<Categoria> getCategorias()
@@ -46,9 +46,9 @@ public class Empresa {
         return choferes.get(ind);
     }
 
-    public ArrayList<Colectivo> getColectivos()
+    public ArrayList<Vehiculo> getColectivos()
     {
-        return colectivos;
+        return vehiculos;
     }
     public void agregarCategoria(Categoria categoria)
     {
@@ -61,11 +61,11 @@ public class Empresa {
     public void agregarColectivo(Vehiculo vehiculo)
     {
         nrointerno ++;
-        colectivos.add(vehiculo);
+        vehiculos.add(vehiculo);
     }
     public int totalColectivos()
     {
-        return colectivos.size();
+        return vehiculos.size();
     }
 
     public  String nombredeCategoria(int ind)
