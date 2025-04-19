@@ -207,5 +207,82 @@ int i, aux = 0;
 }
 **/
 
+void Imprime(componentes *comp)
+{
 
+    int ind,i, no_error;
+    int16_t cantidad_cl, cantidad_ch,formato;
+    int32_t masc;
 
+    ind = (*comp).registro[13] ;
+    TradLogicaFisica(&ind , comp , &no_error) ;
+    if(no_error == 0 )
+    {
+
+        cantidad_cl = (*comp).registro[12] & 0x0F ;
+        cantidad_ch =( (*comp).registro[12] >> 4 ) & Ox0F ;
+        formato = (*comp).memoria & 0x0F ;
+
+        masc = mascara(cantidad_cl);
+
+        printf("[04X] : ",ind);
+
+        for( i=0 ; i < cantidad_cl ; i++)
+        {
+
+            if(formato & 0x01 == 0x01 )
+
+                printf("%d\t",(*comp).memoria[ind] & mac );
+
+            if(formato & 0X02 == 0x02)
+
+                printf("%c\t",(*comp).memoria[ind] & masc );
+
+            if(formato & 0x04 == 0x04)
+
+                printf("%O\t",(*comp).memoria[ind] & masc );
+
+            if(formato & 0x08 == 0x08)
+
+                printf("%X\t",(*comp).memoria[ind] & masc );
+
+            if (formato & 0x10 == 0x10)
+
+                printf("%b\t",(*comp).memoria[ind] & masc );
+
+            ind ++;
+            i++;
+
+        }
+    }else
+
+        (*comp).error = 3;
+
+}
+
+int32_t mascara(int16_t cantidad_cl)
+{
+
+    switch(cantidad_cl):
+
+        case 1:
+
+            return 0x0F;
+            break;
+
+        case 2:
+
+            return 0xFF;
+            break;
+
+        case 3:
+
+            return 0xFFF;
+            break;
+
+        case 4:
+
+            return 0xFFFF;
+            break;
+
+}
