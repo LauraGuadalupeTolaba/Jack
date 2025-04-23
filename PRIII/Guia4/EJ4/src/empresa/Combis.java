@@ -15,7 +15,7 @@ public class Combis extends Vehiculos{
      * <b> pre: </b> La cantidad de plazas debe ser un numero positivo y menor a las plazas totales.<br>
      * <b> post : </b> Se modifica el valor de la cantidad de plazas que se van a utilizar. <br>
      *
-     * @param cantplaza Es la cantidad de plazas que se van a ocupar. cantplaza > 0 , cantplaza <= 9
+     * @param cantplaza Es la cantidad de plazas que se van a ocupar.
      */
     public void setCantplaza(int cantplaza)
     {

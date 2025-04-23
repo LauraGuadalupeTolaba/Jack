@@ -37,8 +37,8 @@ public abstract class  Vehiculos {
      * <b> pre: </b> La cantidad de días debe ser un numero mayor o igual a uno.
      * <b> post : </b> Se obtiene el precio del aquiler por los días dados.
      *
-     * @param dias Es la cantidad de dias que se va a alquilar el vehículo. dias >= 1
-     * @return
+     * @param dias Es la cantidad de dias que se va a alquilar el vehículo.
+     * @return Devuelve el precio del alquiler total
      */
     public abstract double PrecioAlquiler(int dias);
 

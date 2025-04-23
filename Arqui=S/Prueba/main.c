@@ -28,7 +28,7 @@ typedef char stringg[5];
 TDatos obtener_abc(int8_t);
 void EjecutarOperacion(TDatos);
 void LeeArchivo(Componentes);
-void Disassembler(Componentes,TDatos,int);
+void Disassembler(Componentes,TDatos,int*);
 void Op_AB(int8_t , Componentes , int32_t *,int*);
 void Significado(int8_t , int32_t);
 
@@ -36,7 +36,7 @@ int main()
 {
     TDatos abc;
     Componentes comp;
-    int i =10;
+    int i =0,fin=12;
     int8_t instruccion;
 
     comp.memoria[0]=0xB1;
@@ -54,38 +54,42 @@ int main()
 
 
     instruccion = 0x00;
-    instruccion = comp.memoria[i];
-    // printf("instruccion: %02X\n",instruccion); prueba
-    abc = obtener_abc(instruccion);
-    // printf("OpA : %02X\t OpB : %02X\n",abc.OpA,abc.OpB); prueba
-    Disassembler(comp,abc,i);
+    while(i<fin){
+            instruccion = comp.memoria[i];
+            // printf("instruccion: %02X\n",instruccion); prueba
+            abc = obtener_abc(instruccion);
+            // printf("OpA : %02X\t OpB : %02X\n",abc.OpA,abc.OpB); prueba
+            Disassembler(comp,abc,&i);
+    }
+
 
 }
 
-void Disassembler(Componentes comp,TDatos abc, int i)
+void Disassembler(Componentes comp,TDatos abc, int *i)
 {
     stringg Operaciones[TOTAL] = {"SYS","JMP","JZ","JP","JN","JNZ","JNP","JNN","NOT","","","","","","","STOP","MOV","ADD","SUB","SWAP","MUL","DIV","CMP","SHL","SHR","AND","OR","XOR","LDL","LDH","RND"};
     int32_t auxb,auxa;
-    int ind=i;
+    int ind=*i;
 
-    printf("[%04X]\t %02X\t",i,comp.memoria[i]);
+    printf("[%04X] %02X ",ind,comp.memoria[ind]);
     // Muestra los valores en hexadecimal.
     auxa=auxb=0X0;
     Op_AB(abc.OpB,comp,&auxb,&ind);
     Op_AB(abc.OpA,comp,&auxa,&ind);
 
-    printf("|\t");
+    printf(" | ");
 
-    printf("%s\t",Operaciones[abc.CodOperacion]);
+    printf(" %s ",Operaciones[abc.CodOperacion]);
 
     if(abc.OpA != 0x0)
     {
         Significado(abc.OpA,auxa);
-        printf(",\t");
+        printf(", ");
     }
 
     Significado(abc.OpB,auxb);
     printf("\n");
+    *i=ind+1;
 
 }
 
@@ -123,7 +127,7 @@ void Op_AB(int8_t Op, Componentes comp, int32_t *aux,int *i)
 
         (*i)++;
         *aux = *aux << 8;
-        printf("%02X\t",comp.memoria[*i]);
+        printf(" %02X ",comp.memoria[*i]);
         *aux =(*aux) | comp.memoria[*i];
         inicio ++;
 
@@ -205,7 +209,7 @@ int i, aux = 0;
     }
 
 }
-**/
+
 
 void Imprime(componentes *comp)
 {
@@ -286,3 +290,4 @@ int32_t mascara(int16_t cantidad_cl)
             break;
 
 }
+**/
